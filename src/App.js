@@ -1,89 +1,92 @@
 import React, { Component } from 'react';
 import Header from './components/Header';
 import Formulario from './components/Formulario';
-import Resultado from './components/Resultado';
+import Cepas from './components/Cepas';
 
 import axios from 'axios'
 
 
-const token="qGDuWWv";
+
 
 
 
 class App extends Component {
-
+  
+  token = 'qGDuWWv'
   // Cargo el state vacio
-
   state = {
     feelings: [],
     strains: [],
     results: []
   }
-
-  // Cuando se carga la pagina, se obtienen los estados de animo
+  
+  // Cuando se carga la pagina, se obtienen los estados de animo y las cepas
   async componentDidMount() {
     this.getFeelings();
+    this.getStrains();
   }
 
-
-
- // Método para obtener los estados de ánimo de la API Strain
+  
+  // Método para obtener los malestares 
   getFeelings = async () => {
-    const urlFeelings=`http://strainapi.evanbusse.com/${token}/searchdata/effects`;
+    const urlFeelings=`http://strainapi.evanbusse.com/${this.token}/searchdata/effects`;
     await axios.get(urlFeelings)
-      .then(response => {
-          this.setState({
-            feelings:  response.data
-          })
+    .then(response => {
+      const feel = response.data
+      this.setState({
+        feelings:  feel
       })
-      .catch(error => {console.log(error)})
-        
-
+    })
+    .catch(error => {console.log(error)})   
   }
-
-  // Traigo todas as cepas, luego las filtro (HAY QUE CAMBIAR ESTO ES POCO OPTIMO)
+  
+  // Traigo todas as cepas al state
   getStrains = async () => {
-    
-    const url = `http://strainapi.evanbusse.com/${token}/strains/search/all`
-    
+    const url = `http://strainapi.evanbusse.com/${this.token}/strains/search/all`
     await axios.get(url)
-      .then(response => {
-        this.setState({
-          strains:  response.data
-        })
-      }).catch(error => {console.log(error)})
+    .then(response => {
+      const stainNeed = response.data
+      this.setState({
+        strains: stainNeed
+      })
+    }).catch(error => {console.log(error)})
   }
-
-
-
-
-
-  render(){
+  
+  getResults = async (res) => {
     
- 
-  return (
-    <React.Fragment>
+    this.setState({
+      results: res
       
-          <Header/>
-      
-          <Formulario 
-              strains = {this.state.strains}
-              feelings={this.state.feelings}
-              getStrains={this.getStrains}
-              results={this.state.results}
-              
-          />
-           
+    })
 
-           <Resultado 
-              
-           />
-    </React.Fragment>
-
-
-   );
+    
   }
-
-}
-
-export default App;
+  
+  
+  render(){
+    return (
+      <React.Fragment>
+      
+      <Header
+      
+      />
+      
+      <Formulario 
+          strains = {this.state.strains}
+          feelings={this.state.feelings}
+          getStrains={this.getStrains}
+          getResults={this.getResults}
+       />
+      
+      <Cepas 
+          results={this.state.results}  
+      />
+      
+      </React.Fragment>
+      
+      
+      );
+    }
+  }
+  
+  export default App;

@@ -2,6 +2,41 @@ body {
   background: #A1FFCE;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #FAFFD1, #A1FFCE);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #FAFFD1, #A1FFCE); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  margin: 0;
+  padding: 0;
+  font-family: 'Lato', sans-serif;
+    min-height: 100%;
+}
+
+html {
+  height: 100%;
+}
+
+header {
+  
+  color: white;
+  padding: 5rem 0;
+}
+h1 {
+  color: rgb(3, 53, 7);
+  font-weight: 900;
+}
+.uk-button {
+  width: 100%;
+  background-color: rgb(3, 53, 7);
+}
+
+.span-race{
+  text-transform: uppercase;
+  font-weight: 200;
+  color: green;
+  
   
 }
 
+.strain-name{
+  text-transform: uppercase;
+  font-weight: 700;
+  
+  
+}

@@ -2,13 +2,14 @@ import React from 'react';
 
 const Header = () => {
     return(
-        <React.Fragment>
-
-            <div className="container mt-5 pb-2   d-flex justify-content-center">
-                <h1>Find the Strain for your Discomfort</h1>
-            </div>
         
-        </React.Fragment>
+            <header className="uk-magin" uk-margin="true">
+                <h1 className="uk-text-center">Find the Strain for your Discomfort</h1>
+
+            </header>
+            
+        
+        
 
     )
 
